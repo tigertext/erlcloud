@@ -71,7 +71,8 @@
 -spec new(string(), string()) -> aws_config().
 
 new(AccessKeyID, SecretAccessKey) ->
-    #aws_config{
+    DefaultConfig = default_config(), 
+    DefaultConfig#aws_config{
        access_key_id=AccessKeyID,
        secret_access_key=SecretAccessKey
       }.
@@ -79,7 +80,8 @@ new(AccessKeyID, SecretAccessKey) ->
 -spec new(string(), string(), string()) -> aws_config().
 
 new(AccessKeyID, SecretAccessKey, Host) ->
-    #aws_config{
+    DefaultConfig = default_config(), 
+    DefaultConfig#aws_config{
        access_key_id=AccessKeyID,
        secret_access_key=SecretAccessKey,
        s3_host=Host
@@ -89,7 +91,8 @@ new(AccessKeyID, SecretAccessKey, Host) ->
 -spec new(string(), string(), string(), non_neg_integer()) -> aws_config().
 
 new(AccessKeyID, SecretAccessKey, Host, Port) ->
-    #aws_config{
+    DefaultConfig = default_config(), 
+    DefaultConfig#aws_config{
        access_key_id=AccessKeyID,
        secret_access_key=SecretAccessKey,
        s3_host=Host,
@@ -99,7 +102,8 @@ new(AccessKeyID, SecretAccessKey, Host, Port) ->
 -spec new(string(), string(), string(), non_neg_integer(), string()) -> aws_config().
 
 new(AccessKeyID, SecretAccessKey, Host, Port, Scheme) ->
-    #aws_config{
+    DefaultConfig = default_config(), 
+    DefaultConfig#aws_config{
        access_key_id=AccessKeyID,
        secret_access_key=SecretAccessKey,
        s3_host=Host,
