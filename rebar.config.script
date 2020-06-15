@@ -1,11 +1,15 @@
-case erlang:system_info(otp_release) =< "R15B01" of
-    true  ->
-        HashDefine = [{d,old_hash}],
-        case lists:keysearch(erl_opts, 1, CONFIG) of
-            {value, {erl_opts, Opts}} ->
-                lists:keyreplace(erl_opts,1,CONFIG,{erl_opts,Opts++HashDefine});
-            false ->
-                CONFIG ++ [{erl_opts, HashDefine}]
-        end;
-    false -> CONFIG
+%% -*- mode: erlang; -*-
+case erlang:function_exported(rebar3, main, 1) of
+    true -> % rebar3
+        CONFIG;
+    false -> % rebar 2.x or older
+        %% Use git-based deps
+        %% profiles
+        [{deps, [{meck, ".*",{git, "https://github.com/eproxus/meck.git", {tag, "0.8.13"}}},
+                 {jsx, ".*", {git, "git://github.com/talentdeficit/jsx.git", {tag, "2.9.0"}}},
+                 %% {hackney, ".*", {git, "git://github.com/benoitc/hackney.git", {tag, "1.2.0"}}},
+                 {eini, ".*", {git, "https://github.com/erlcloud/eini.git", {tag, "1.2.7"}}},
+                 {lhttpc, ".*", {git, "git://github.com/erlcloud/lhttpc", {tag, "1.6.2"}}},
+                 {base16, ".*", {git, "https://github.com/goj/base16.git", {tag, "1.0.0"}}}]}
+         | lists:keydelete(deps, 1, CONFIG)]
 end.

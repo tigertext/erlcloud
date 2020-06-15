@@ -2,8 +2,8 @@
 %% ex: ts=4 sw=4 ft=erlang et
 
 {application, erlcloud,
- [{description, "Erlang cloud computing library"},
-  {vsn, "0.4.1"},
+ [{description, "AWS APIs library for Erlang"},
+  {vsn, "git"},
   {registered, []},
   {applications, [stdlib,
                   kernel,
@@ -13,8 +13,17 @@
                   xmerl,
                   inets,
                   jsx,
+                  eini,
+                  base16,
+                  %% hackney,
                   lhttpc]},
   {modules, []},
-  {env, []}
+  {env, [
+      % Example    [{<<"kinesis">>, [<<"myAZ1.amazonaws.com">>, <<"myAZ2.amazonaws.com">>]}]
+      % or via ENV [{<<"kinesis">>, {env, "KINESIS_VPC_ENDPOINTS"}]
+      {services_vpc_endpoints, []}
+  ]},
+  {licenses, ["MIT"]},
+  {links, [{"Github", "https://github.com/erlcloud/erlcloud"}]}
  ]
 }.
